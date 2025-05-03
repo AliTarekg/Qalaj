@@ -8,6 +8,8 @@ import Separator from "./separator";
 import { useTranslation } from "react-i18next";
 import ServiceSlider from "./ServiceSlider";
 import { useTheme } from "../ThemeContext";
+import logoDark from '../assets/logo-dark.svg';
+import logoLight from '../assets/logo-light.svg';
 
 const AnimatedCounter = ({ target, duration = 3, suffix = "" }) => {
   const ref = useRef(null);
@@ -110,7 +112,7 @@ const Home = () => {
             </Col>
             <Col md={6} ref={heroImageRef} className="hero-image-col">
               <img
-                src={theme === 'dark' ? '/assets/logo-dark.svg' : '/assets/logo-light.svg'}
+                src={theme === 'dark' ? logoDark : logoLight}
                 alt="Qalaj Creative Solutions"
                 className="img-fluid hero-img-contained"
                 style={{ maxWidth: "100%", height: "auto", display: "block", margin: "0 auto" }}
