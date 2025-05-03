@@ -12,99 +12,86 @@ import { useTheme } from "../ThemeContext";
     const { t } = useTranslation();
     const { theme } = useTheme();
     return (
-      <MDBFooter style={{ background: 'var(--color-navbar)' ,color:'var(--color-text)'}} className={`text-center text-lg-start `}>
+      <MDBFooter style={{ background: 'var(--color-navbar)', color:'var(--color-text)', fontSize: '1.1rem', lineHeight: '1.8' }} className={`text-center text-lg-start`}>
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
-            <span>{t('footer.about')}</span>
+            <span style={{ fontSize: '1.2rem', fontWeight: '500' }}>{t('footer.about')}</span>
           </div>
         </section>
   
-        <section className="">
+        <section>
           <MDBContainer className="text-center text-md-start mt-5">
             <MDBRow className="mt-3">
-              {/* About Section */}
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">
+                <h6 className="text-uppercase fw-bold mb-4" style={{ fontSize: '1.3rem', letterSpacing: '0.5px' }}>
                   <MDBIcon icon="paint-brush" className="me-3" />
                   Qalaj - قَلچ 
                 </h6>
-                <p>{t('footer.about')}</p>
+                <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>{t('footer.about')}</p>
               </MDBCol>
   
-              {/* Services Categories */}
               <MDBCol md="2" lg="2" xl="2" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">{t('footer.services')}</h6>
-                <p>
-                  <a href="/graphic-design" className="text-reset">
-                    {t('navbar.graphic_design')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/printing" className="text-reset">
-                    {t('navbar.printing')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/web-development" className="text-reset">
-                    {t('navbar.web_development')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/supplies" className="text-reset">
-                    {t('navbar.supplies')}
-                  </a>
-                </p>
+                <h6 className="text-uppercase fw-bold mb-4" style={{ fontSize: '1.2rem' }}>{t('footer.services')}</h6>
+                {['graphic_design', 'printing', 'web_development', 'supplies'].map((service) => (
+                  <p key={service}>
+                    <a href={`/${service.replace('_', '-')}`} className="text-reset" style={{ 
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                      fontSize: '1.1rem',
+                      display: 'block',
+                      padding: '0.3rem 0'
+                    }}>
+                      {t(`navbar.${service}`)}
+                    </a>
+                  </p>
+                ))}
               </MDBCol>
   
-              {/* Useful Links */}
               <MDBCol md="3" lg="2" xl="2" className="mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">{t('footer.quick_links')}</h6>
-                <p>
-                  <a href="/about" className="text-reset">
-                    {t('footer.about_us')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/portfolio" className="text-reset">
-                    {t('footer.portfolio')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/contact" className="text-reset">
-                    {t('footer.contact')}
-                  </a>
-                </p>
-                <p>
-                  <a href="/request-quote" className="text-reset">
-                    {t('footer.request_quote')}
-                  </a>
-                </p>
+                <h6 className="text-uppercase fw-bold mb-4" style={{ fontSize: '1.2rem' }}>{t('footer.quick_links')}</h6>
+                {[
+                  { path: '/about', text: 'footer.about_us' },
+                  { path: '/portfolio', text: 'footer.portfolio' },
+                  { path: '/contact', text: 'footer.contact' },
+                  { path: '/request-quote', text: 'footer.request_quote' }
+                ].map((link) => (
+                  <p key={link.path}>
+                    <a href={link.path} className="text-reset" style={{ 
+                      textDecoration: 'none',
+                      transition: 'color 0.3s ease',
+                      fontSize: '1.1rem',
+                      display: 'block',
+                      padding: '0.3rem 0'
+                    }}>
+                      {t(link.text)}
+                    </a>
+                  </p>
+                ))}
               </MDBCol>
   
-              {/* Contact Section */}
               <MDBCol md="4" lg="3" xl="3" className="mx-auto mb-md-0 mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">{t('footer.contact_us')}</h6>
-                <p>
-                  <MDBIcon icon="map-marker-alt" className="me-2" />
-                  {t('footer.address')}
-                </p>
-                <p>
-                  <MDBIcon icon="envelope" className="me-3" />
-                  {t('footer.email')}
-                </p>
-                <p>
-                  <MDBIcon icon="phone" className="me-3" /> {t('footer.phone')}
-                </p>
-                <p>
-                  <MDBIcon icon="clock" className="me-3" />
-                  {t('footer.hours')}
-                </p>
+                <h6 className="text-uppercase fw-bold mb-4" style={{ fontSize: '1.2rem' }}>{t('footer.contact_us')}</h6>
+                {[
+                  { icon: 'map-marker-alt', text: 'footer.address', className: 'me-2' },
+                  { icon: 'envelope', text: 'footer.email', className: 'me-3' },
+                  { icon: 'phone', text: 'footer.phone', className: 'me-3' },
+                  { icon: 'clock', text: 'footer.hours', className: 'me-3' }
+                ].map((item) => (
+                  <p key={item.text} style={{ fontSize: '1.1rem', margin: '1rem 0' }}>
+                    <MDBIcon icon={item.icon} className={item.className} />
+                    {t(item.text)}
+                  </p>
+                ))}
               </MDBCol>
             </MDBRow>
           </MDBContainer>
         </section>
   
-        <div className="text-center p-4" style={{ backgroundColor: theme === 'dark' ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)" }}>
+        <div className="text-center p-4" style={{ 
+          backgroundColor: theme === 'dark' ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)",
+          fontSize: '1rem',
+          fontWeight: '500'
+        }}>
           {t('footer.copyright')}
         </div>
       </MDBFooter>

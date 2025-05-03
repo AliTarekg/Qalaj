@@ -26,31 +26,57 @@
 
 .navbar-modern .nav-link {
   color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+[dir="rtl"] .navbar-modern .nav-link {
+  font-size: 1.2rem;
+  letter-spacing: 0;
 }
 
 .navbar-modern .nav-link:hover {
   color: var(--color-secondary);
+  transform: translateY(-2px);
 }
 
 /* Active Link Styling */
 .navbar-modern .nav-link.active {
   color: var(--color-secondary) !important;
   border-bottom: 4px solid var(--color-secondary);
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+.navbar-modern .navbar-brand {
+  font-weight: 700;
 }
 
 .navbar-modern .navbar-brand span {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+}
+
+[dir="rtl"] .navbar-modern .navbar-brand span {
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 .navbar-modern .dropdown-item {
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+}
+
+[dir="rtl"] .navbar-modern .dropdown-item {
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
 .navbar-modern .dropdown-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-secondary);
+  transform: translateX(5px);
 }

@@ -87,7 +87,8 @@
         "Content management systems (CMS)",
         "Mobile-friendly & responsive design",
         "SEO optimization & analytics integration"
-      ]
+      ],
+      "card_desc": "Modern, responsive websites and web applications built with cutting-edge technologies"
     },
     "printing": {
       "title": "Printing",
@@ -101,7 +102,8 @@
         "Large format banners",
         "Custom packaging",
         "Eco-friendly printing options"
-      ]
+      ],
+      "card_desc": "High-quality printing services with fast delivery for all your business needs"
     },
     "designing": {
       "title": "Graphic Design",
@@ -115,7 +117,11 @@
         "Marketing materials",
         "Packaging design",
         "Infographics & presentations"
-      ]
+      ],
+      "card_desc": "Creative graphic design solutions that make your brand stand out"
+    },
+    "supplies": {
+      "card_desc": "Premium office and educational supplies at competitive prices"
     },
     "contact_us": {
       "title": "Contact Us",
