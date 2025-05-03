@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 import { useTheme } from "../ThemeContext";
 import "./NavigationBar.css";
+import logoDark from '../assets/logo-dark.svg';
+import logoLight from '../assets/logo-light.svg';
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const NavigationBar = () => {
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img
-            src={theme === 'dark' ? '/assets/logo-dark.svg' : '/assets/logo-light.svg'}
+            src={theme === 'dark' ? logoDark : logoLight}
             alt="Logo"
             className="d-inline-block align-top me-2"
             style={{ height: "48px" }}

@@ -1,4 +1,6 @@
 import { useTheme } from "../ThemeContext";
+import textDark from '../assets/text-dark.svg';
+import textLight from '../assets/text-light.svg';
 
 const Separator = () => {
   const { theme } = useTheme();
@@ -39,7 +41,7 @@ const Separator = () => {
     <div style={containerStyle}>
       <div style={flexContainerStyle}>
         <div style={lineStyleLeft} />
-        <img src={theme === 'dark' ? '/assets/text-dark.svg' : '/assets/text-light.svg'} alt="Website Logo" style={logoStyle} />
+        <img src={theme === 'dark' ? textDark : textLight} alt="Website Logo" style={logoStyle} />
         <div style={lineStyleRight} />
       </div>
     </div>

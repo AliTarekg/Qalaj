@@ -1,26 +1,28 @@
 import "../assets/Home.css";
+import textDark from '../assets/text-dark.svg';
+import logoDark from '../assets/logo-dark.svg';
 
 const services = [
   {
-    icon: "/assets/text-dark.svg",
+    icon: textDark,
     title: "تصميم جرافيك",
     subtitle: "Graphic Design",
     desc: "تصميم شعارات، هويات بصرية، سوشيال ميديا وأكثر."
   },
   {
-    icon: "/assets/logo-dark.svg",
+    icon: logoDark,
     title: "الطباعة",
     subtitle: "Printing",
     desc: "جميع خدمات الطباعة التجارية والدعائية بجودة عالية."
   },
   {
-    icon: "/assets/text-dark.svg",
+    icon: textDark,
     title: "تطوير الأنظمة",
     subtitle: "System Development",
     desc: "برمجة مواقع وتطبيقات وحلول برمجية متكاملة."
   },
   {
-    icon: "/assets/logo-dark.svg",
+    icon: logoDark,
     title: "توريدات الشركات",
     subtitle: "Company Supplies",
     desc: "توريد مستلزمات مكتبية وأجهزة للشركات والمؤسسات."
