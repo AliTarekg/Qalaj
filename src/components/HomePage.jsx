@@ -112,7 +112,7 @@ const Home = () => {
             </Col>
             <Col md={6} ref={heroImageRef} className="hero-image-col">
               <img
-                src={theme === 'dark' ? logoDark : logoLight}
+                src={theme === 'dark' ? logoDark : logoDark}
                 alt="Qalaj Creative Solutions"
                 className="img-fluid hero-img-contained"
                 style={{ maxWidth: "100%", height: "auto", display: "block", margin: "0 auto" }}
