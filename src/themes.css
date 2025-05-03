@@ -1,0 +1,45 @@
+/* Light Theme */
+:root {
+  --color-bg: #f8f9fa;
+  --color-text: #dfdfdf;
+  --color-primary: #284574;
+  --color-secondary: #d8ab41;
+  --color-accent: #073b4c;
+  --color-navbar: linear-gradient(135deg, #284574, #161F48);
+  --color-card: #fff;
+}
+
+/* Dark Theme */
+.theme-dark {
+  --color-bg: #101624;
+  --color-text: #f3e6c1;
+  --color-primary: #161F48;
+  --color-secondary: #d8ab41;
+  --color-accent: #284574;
+  --color-navbar: linear-gradient(135deg, #161F48, #101624);
+  --color-card: #181c2a;
+}
+
+body, html {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.navbar-modern {
+  background: var(--color-navbar);
+}
+
+.card, .service-card, .neon-card {
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-secondary);
+}
+
+.btn-primary:hover {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+}

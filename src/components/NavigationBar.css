@@ -1,0 +1,56 @@
+/* NavigationBar.css */
+.navbar-modern {
+  background: var(--color-navbar);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Center nav links absolutely on larger screens */
+.custom-center-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+}
+
+/* On smaller screens, revert to normal flow */
+@media (max-width: 991px) {
+  .custom-center-nav {
+    position: static;
+    transform: none;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+.navbar-modern .nav-link {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-modern .nav-link:hover {
+  color: var(--color-secondary);
+}
+
+/* Active Link Styling */
+.navbar-modern .nav-link.active {
+  color: var(--color-secondary) !important;
+  border-bottom: 4px solid var(--color-secondary);
+  transform: scale(1.1);
+}
+
+.navbar-modern .navbar-brand span {
+  font-size: 1.25rem;
+}
+
+.navbar-modern .dropdown-item {
+  transition: background-color 0.3s ease;
+}
+
+.navbar-modern .dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
