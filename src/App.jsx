@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/Navbar";
+import WhatsAppButton from "./components/WhatsAppButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 const NotFound = React.lazy(() => import("./components/404"));
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <WhatsAppButton />
       <Footer />
     </Router>
   );

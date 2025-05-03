@@ -684,3 +684,27 @@ p {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome/Safari/Webkit */
 }
+
+/* WhatsApp Button Styles */
+.whatsapp-button {
+  z-index: 1000 !important;
+}
+
+.whatsapp-button iframe {
+  z-index: 1001 !important;
+}
+
+[dir="rtl"] .whatsapp-button {
+  left: 25px !important;
+  right: auto !important;
+}
+
+.floating-whatsapp .floating-whatsapp-message {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-whatsapp .floating-whatsapp-message p {
+  color: var(--color-text);
+}

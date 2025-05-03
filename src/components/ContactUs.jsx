@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet } from "react-helmet";
+import emailjs from '@emailjs/browser';
+import WhatsAppButton from './WhatsAppButton';
 
 const ContactUs = () => {
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const form = useRef();
+  const [status, setStatus] = useState({ sent: false, error: false });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    emailjs.sendForm(
+      'service_355ipa8', // Replace with your EmailJS service ID
+      'template_o03dt3a', // Replace with your EmailJS template ID
+      form.current,
+      'cf-taPNYxQMiJFoMP' // Replace with your EmailJS public key
+    )
+    .then(() => {
+      setStatus({ sent: true, error: false });
+      form.current.reset();
+    })
+    .catch(() => {
+      setStatus({ sent: false, error: true });
+    })
+    .finally(() => {
+      setIsSubmitting(false);
+    });
   };
 
   return (
@@ -27,21 +42,36 @@ const ContactUs = () => {
       <p className="lead text-center">{t('pages.contact_us.intro')}</p>
       <div className="row mt-5">
         <div className="col-md-6 mb-4">
-          <form onSubmit={handleSubmit}>
+          <form ref={form} onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">{t('pages.contact_us.form.name')}</label>
-              <input type="text" className="form-control" name="name" value={form.name} onChange={handleChange} required />
+              <input type="text" className="form-control" name="user_name" required />
             </div>
             <div className="mb-3">
               <label className="form-label">{t('pages.contact_us.form.email')}</label>
-              <input type="email" className="form-control" name="email" value={form.email} onChange={handleChange} required />
+              <input type="email" className="form-control" name="user_email" required />
             </div>
             <div className="mb-3">
               <label className="form-label">{t('pages.contact_us.form.message')}</label>
-              <textarea className="form-control" name="message" rows="5" value={form.message} onChange={handleChange} required />
+              <textarea className="form-control" name="message" rows="5" required />
             </div>
-            <button type="submit" className="btn btn-primary w-100">{t('pages.contact_us.form.submit')}</button>
-            {sent && <div className="alert alert-success mt-3">{t('pages.contact_us.form.success')}</div>}
+            <button 
+              type="submit" 
+              className="btn btn-primary w-100"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Sending...' : t('pages.contact_us.form.submit')}
+            </button>
+            {status.sent && (
+              <div className="alert alert-success mt-3">
+                {t('pages.contact_us.form.success')}
+              </div>
+            )}
+            {status.error && (
+              <div className="alert alert-danger mt-3">
+                An error occurred. Please try again or contact us via WhatsApp.
+              </div>
+            )}
           </form>
         </div>
         <div className="col-md-6 mb-4">
@@ -54,6 +84,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
+      <WhatsAppButton />
     </div>
   );
 };

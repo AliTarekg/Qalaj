@@ -4,18 +4,18 @@ import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 import { useTheme } from "../ThemeContext";
 import "./NavigationBar.css";
-import logoDark from '../assets/logo-dark.svg';
-import logoLight from '../assets/logo-light.svg';
+import logoDark from "../assets/logo-dark.svg";
+import logoLight from "../assets/logo-light.svg";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const currentLang = i18n.language || 'ar';
+  const currentLang = i18n.language || "ar";
   const { theme, toggleTheme } = useTheme();
-  const dir = document.documentElement.dir || 'ltr';
+  const dir = document.documentElement.dir || "ltr";
 
   const toggleLang = () => {
-    const newLang = currentLang === 'ar' ? 'en' : 'ar';
+    const newLang = currentLang === "ar" ? "en" : "ar";
     i18n.changeLanguage(newLang);
   };
 
@@ -29,13 +29,13 @@ const NavigationBar = () => {
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img
-            src={theme === 'dark' ? logoDark : logoLight}
+            src={theme === "dark" ? logoDark : logoLight}
             alt="Logo"
             className="d-inline-block align-top me-2"
             style={{ height: "48px" }}
           />
           <span className="fw-bold " style={{ marginRight: "8px" }}>
-            {currentLang === 'ar' ? ' قَلچ ' : 'Qalaj'}
+            {currentLang === "ar" ? " قَلچ " : "Qalaj"}
           </span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -45,38 +45,40 @@ const NavigationBar = () => {
         >
           <Nav className="custom-center-nav mx-auto">
             <Nav.Link as={NavLink} to="/">
-              {t('navbar.home')}
+              {t("navbar.home")}
             </Nav.Link>
             <Nav.Link as={NavLink} to="/our-work">
-              {t('pages.our_work.title')}
+              {t("pages.our_work.title")}
             </Nav.Link>
-            <NavDropdown title={t('navbar.services')} id="services-dropdown">
+            <NavDropdown title={t("navbar.services")} id="services-dropdown">
               <NavDropdown.Item as={NavLink} to="/graphic-design">
-                {t('navbar.graphic_design')}
+                {t("navbar.graphic_design")}
               </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/printing">
-                {t('navbar.printing')}
+                {t("navbar.printing")}
               </NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to="/web-development">
-                {t('navbar.web_development')}
-              </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/supplies">
-                {t('navbar.supplies')}
+                {t("navbar.web_development")}
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={NavLink} to="/contact">
-              {t('navbar.contact')}
+              {t("navbar.contact")}
             </Nav.Link>
             <Nav.Link as={NavLink} to="/about">
-              {t('footer.about_us')}
+              {t("footer.about_us")}
             </Nav.Link>
           </Nav>
-          <div className={`d-flex align-items-center ${dir === 'rtl' ? 'me-auto' : 'ms-auto'}`} style={{ gap: '0.5rem' }}>
+          <div
+            className={`d-flex align-items-center ${
+              dir === "rtl" ? "me-auto" : "ms-auto"
+            }`}
+            style={{ gap: "0.5rem" }}
+          >
             <Nav.Link onClick={toggleLang} style={{ fontWeight: 700 }}>
-              {t('lang.toggle')}
+              {t("lang.toggle")}
             </Nav.Link>
             <Nav.Link onClick={toggleTheme} style={{ fontWeight: 700 }}>
-              {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+              {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
             </Nav.Link>
           </div>
         </Navbar.Collapse>
