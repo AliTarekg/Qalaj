@@ -1,34 +1,37 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap");
 
 /* Light Theme */
 :root {
   --color-bg: #f8f9fa;
   --color-text: #dfdfdf;
+  --color-text-dark: #09025f;
   --color-primary: #284574;
   --color-secondary: #d8ab41;
   --color-accent: #073b4c;
-  --color-navbar: linear-gradient(135deg, #284574, #161F48);
-  --color-card: #d8ab41;
-  --font-family-arabic: 'Cairo', sans-serif;
-  --font-family-english: 'Raleway', sans-serif;
+  --color-navbar: linear-gradient(135deg, #284574, #161f48);
+  --color-card: #d19c21;
+  --font-family-arabic: "Cairo", sans-serif;
+  --font-family-english: "Raleway", sans-serif;
 }
 
 /* Dark Theme */
 .theme-dark {
   --color-bg: #101624;
   --color-text: #f3e6c1;
-  --color-primary: #161F48;
+  --color-text-dark: #f3f1fd;
+  --color-primary: #161f48;
   --color-secondary: #d8ab41;
   --color-accent: #284574;
-  --color-navbar: linear-gradient(135deg, #161F48, #101624);
-  --color-card: #d8ab41;
+  --color-navbar: linear-gradient(135deg, #161f48, #101624);
+  --color-card: #d19c21;
 }
 
-body, html {
+body,
+html {
   background: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-text-dark);
 }
 
 [dir="rtl"] {
@@ -39,19 +42,27 @@ body, html {
   font-family: var(--font-family-english);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.4;
   margin-bottom: 1rem;
+  color: var(--color-text-dark);
 }
 
 .navbar-modern {
   background: var(--color-navbar);
 }
 
-.card, .service-card, .neon-card {
+.card,
+.service-card,
+.neon-card {
   background: var(--color-card);
-  color: var(--color-text);
+  color: var(--color-text-dark);
 }
 
 .btn-primary {

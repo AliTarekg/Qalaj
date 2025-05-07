@@ -6,13 +6,11 @@ const WhatsAppButton = () => {
   const { t, i18n } = useTranslation();
   
   const handleSubmit = (message) => {
-    // Format message with proper line breaks and encoding for WhatsApp
     const formattedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/201070870826?text=${formattedMessage}`;
     window.open(whatsappUrl, '_blank');
   };
 
-  // Get notification sound
   const notificationSound = new Audio('https://cdn.jsdelivr.net/npm/react-floating-whatsapp@0.1.0/src/whatsapp-notification.mp3');
   
   return (
@@ -34,7 +32,7 @@ const WhatsAppButton = () => {
       className="whatsapp-button"
       style={{
         // Move button up to avoid conflict with other fixed elements
-        bottom: '70px',
+        bottom: '10px',
         // Adjust based on RTL/LTR
         [i18n.dir() === 'rtl' ? 'left' : 'right']: '25px'
       }}

@@ -6,6 +6,7 @@ import { useTheme } from "../ThemeContext";
 import "./NavigationBar.css";
 import logoDark from "../assets/logo-dark.svg";
 import logoLight from "../assets/logo-light.svg";
+import { useRef, useState, useEffect } from "react";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -13,10 +14,38 @@ const NavigationBar = () => {
   const currentLang = i18n.language || "ar";
   const { theme, toggleTheme } = useTheme();
   const dir = document.documentElement.dir || "ltr";
+  const navDropdownRef = useRef();
+  const [expanded, setExpanded] = useState(false);
+  const navbarRef = useRef();
 
   const toggleLang = () => {
     const newLang = currentLang === "ar" ? "en" : "ar";
     i18n.changeLanguage(newLang);
+  };
+
+  // Close dropdown on navigation
+  const handleDropdownSelect = (eventKey) => {
+    if (navDropdownRef.current) {
+      navDropdownRef.current.props.onToggle(false);
+    }
+    navigate(eventKey);
+  };
+
+  // Collapse navbar on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (expanded && navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setExpanded(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [expanded]);
+
+  // Collapse navbar on navigation
+  const handleNavClick = (to) => {
+    setExpanded(false);
+    if (to) navigate(to);
   };
 
   return (
@@ -25,6 +54,11 @@ const NavigationBar = () => {
       expand="lg"
       variant="dark"
       className="py-3 shadow-sm navbar-modern sticky-top"
+      role="navigation"
+      aria-label="Main navigation"
+      expanded={expanded}
+      onToggle={setExpanded}
+      ref={navbarRef}
     >
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
@@ -38,48 +72,76 @@ const NavigationBar = () => {
             {currentLang === "ar" ? " قَلچ " : "Qalaj"}
           </span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setExpanded((prev) => !prev)} />
         <Navbar.Collapse
           id="responsive-navbar-nav"
           className="position-relative"
         >
-          <Nav className="custom-center-nav mx-auto">
-            <Nav.Link as={NavLink} to="/">
-              {t("navbar.home")}
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/our-work">
-              {t("pages.our_work.title")}
-            </Nav.Link>
-            <NavDropdown title={t("navbar.services")} id="services-dropdown">
-              <NavDropdown.Item as={NavLink} to="/graphic-design">
+          <Nav className="custom-center-nav mx-auto" as="ul">
+            <Nav.Item as="li">
+              <Nav.Link as={NavLink} to="/" end onClick={() => handleNavClick("/")}>
+                {t("navbar.home")}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item as="li">
+              <Nav.Link as={NavLink} to="/our-work" onClick={() => handleNavClick("/our-work")}>
+                {t("pages.our_work.title")}
+              </Nav.Link>
+            </Nav.Item>
+            <NavDropdown
+              title={t("navbar.services")}
+              id="services-dropdown"
+              ref={navDropdownRef}
+              onSelect={(eventKey) => { setExpanded(false); handleDropdownSelect(eventKey); }}
+              menuVariant={theme === 'dark' ? 'dark' : 'light'}
+              renderMenuOnMount={true}
+              aria-label={t("navbar.services")}
+            >
+              <NavDropdown.Item eventKey="/graphic-design" as="button">
                 {t("navbar.graphic_design")}
               </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/printing">
+              <NavDropdown.Item eventKey="/printing" as="button">
                 {t("navbar.printing")}
               </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/web-development">
+              <NavDropdown.Item eventKey="/web-development" as="button">
                 {t("navbar.web_development")}
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={NavLink} to="/contact">
-              {t("navbar.contact")}
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/about">
-              {t("footer.about_us")}
-            </Nav.Link>
+            <Nav.Item as="li">
+              <Nav.Link as={NavLink} to="/contact" onClick={() => handleNavClick("/contact")}>
+                {t("navbar.contact")}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item as="li">
+              <Nav.Link as={NavLink} to="/about" onClick={() => handleNavClick("/about")}>
+                {t("footer.about_us")}
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
           <div
-            className={`d-flex align-items-center ${
+            className={`d-flex align-items-center navbar-actions ${
               dir === "rtl" ? "me-auto" : "ms-auto"
             }`}
             style={{ gap: "0.5rem" }}
           >
-            <Nav.Link onClick={toggleLang} style={{ fontWeight: 700 }}>
+            <button
+              onClick={() => { toggleLang(); setExpanded(false); }}
+              className="nav-action-btn lang-toggle"
+              aria-label={currentLang === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+              tabIndex={0}
+              type="button"
+            >
               {t("lang.toggle")}
-            </Nav.Link>
-            <Nav.Link onClick={toggleTheme} style={{ fontWeight: 700 }}>
-              {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
-            </Nav.Link>
+              </button>
+            <button
+              onClick={() => { toggleTheme(); setExpanded(false); }}
+              className="nav-action-btn theme-toggle"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              tabIndex={0}
+              type="button"
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
           </div>
         </Navbar.Collapse>
       </Container>

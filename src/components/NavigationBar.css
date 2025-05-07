@@ -80,3 +80,49 @@
   color: var(--color-secondary);
   transform: translateX(5px);
 }
+
+/* Add focus-visible for accessibility */
+.navbar-modern .nav-link:focus-visible,
+.navbar-modern .dropdown-item:focus-visible,
+.nav-action-btn:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  background: rgba(216, 171, 65, 0.08);
+}
+
+/* Style for nav-action buttons (lang/theme toggles) */
+.nav-action-btn {
+  background: var(--color-card);
+  color: var(--color-primary);
+  border: 2px solid var(--color-secondary);
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 6px 16px;
+  margin: 0 2px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  cursor: pointer;
+  min-width: 40px;
+  min-height: 36px;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-action-btn:hover,
+.nav-action-btn:active {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Responsive: stack action buttons on mobile */
+@media (max-width: 991px) {
+  .navbar-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
