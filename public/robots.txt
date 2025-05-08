@@ -1,3 +1,25 @@
+# Welcome to Qalaj's robots.txt
 User-agent: *
 Allow: /
+Allow: /graphic-design
+Allow: /printing
+Allow: /web-development
+Allow: /our-work
+Allow: /about
+Allow: /contact
+Allow: /assets/
+
+# Block access to admin or sensitive areas if they exist
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.sql$
+Disallow: /*.zip$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+
+# Crawl parameters
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://qalaj.com/sitemap.xml

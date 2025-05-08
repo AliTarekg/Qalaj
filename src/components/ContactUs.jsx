@@ -35,8 +35,44 @@ const ContactUs = () => {
   return (
     <div className="container py-5">
       <Helmet>
-        <title>{t('pages.contact_us.meta_title')}</title>
-        <meta name="description" content={t('pages.contact_us.meta_desc')} />
+        <title>Contact Us | Qalaj | Qalag | قلج | القلج - Get in Touch</title>
+        <meta name="description" content="Contact Qalaj (قلج) for creative solutions in design, printing, and web development. Qalag, Qalaj, قلج, القلج - Reach out for your next project in Egypt." />
+        <meta name="keywords" content="Qalaj, Qalag, قلج, القلج, contact, Egypt, design, printing, web development, creative solutions" />
+        <link rel="canonical" href="https://qalaj.com/contact" />
+        <meta property="og:title" content="Contact Us | Qalaj | Qalag | قلج | القلج - Get in Touch" />
+        <meta property="og:description" content="Contact Qalaj (قلج) for creative solutions in design, printing, and web development. Reach out for your next project in Egypt." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qalaj.com/contact" />
+        <meta property="og:image" content="/assets/logo-dark.svg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Us | Qalaj | Qalag | قلج | القلج - Get in Touch" />
+        <meta name="twitter:description" content="Contact Qalaj (قلج) for creative solutions in design, printing, and web development. Reach out for your next project in Egypt." />
+        <meta name="twitter:image" content="/assets/logo-dark.svg" />
+        <script type="application/ld+json">{`
+          [{
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact Qalaj",
+            "description": "Contact Qalaj (قلج) for creative solutions in design, printing, and web development.",
+            "url": "https://qalaj.com/contact"
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://qalaj.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact Us",
+              "item": "https://qalaj.com/contact"
+            }]
+          }]
+        `}</script>
       </Helmet>
       <h1 className="mb-4 text-center">{t('pages.contact_us.heading')}</h1>
       <p className="lead text-center">{t('pages.contact_us.intro')}</p>

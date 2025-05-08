@@ -34,7 +34,11 @@ const NavigationBar = () => {
   // Collapse navbar on outside click
   useEffect(() => {
     function handleClickOutside(event) {
-      if (expanded && navbarRef.current && !navbarRef.current.contains(event.target)) {
+      if (
+        expanded &&
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target)
+      ) {
         setExpanded(false);
       }
     }
@@ -72,19 +76,31 @@ const NavigationBar = () => {
             {currentLang === "ar" ? " قَلچ " : "Qalaj"}
           </span>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setExpanded((prev) => !prev)} />
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          onClick={() => setExpanded((prev) => !prev)}
+        />
         <Navbar.Collapse
           id="responsive-navbar-nav"
           className="position-relative"
         >
           <Nav className="custom-center-nav mx-auto" as="ul">
             <Nav.Item as="li">
-              <Nav.Link as={NavLink} to="/" end onClick={() => handleNavClick("/")}>
+              <Nav.Link
+                as={NavLink}
+                to="/"
+                end
+                onClick={() => handleNavClick("/")}
+              >
                 {t("navbar.home")}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link as={NavLink} to="/our-work" onClick={() => handleNavClick("/our-work")}>
+              <Nav.Link
+                as={NavLink}
+                to="/our-work"
+                onClick={() => handleNavClick("/our-work")}
+              >
                 {t("pages.our_work.title")}
               </Nav.Link>
             </Nav.Item>
@@ -92,28 +108,51 @@ const NavigationBar = () => {
               title={t("navbar.services")}
               id="services-dropdown"
               ref={navDropdownRef}
-              onSelect={(eventKey) => { setExpanded(false); handleDropdownSelect(eventKey); }}
-              menuVariant={theme === 'dark' ? 'dark' : 'light'}
+              onSelect={(eventKey) => {
+                setExpanded(false);
+                handleDropdownSelect(eventKey);
+              }}
+              menuVariant={theme === "dark" ? "dark" : "light"}
               renderMenuOnMount={true}
               aria-label={t("navbar.services")}
             >
-              <NavDropdown.Item eventKey="/graphic-design" as="button">
+              <NavDropdown.Item
+                eventKey="/graphic-design"
+                as="button"
+                onClick={() => handleNavClick("/graphic-design")}
+              >
                 {t("navbar.graphic_design")}
               </NavDropdown.Item>
-              <NavDropdown.Item eventKey="/printing" as="button">
+              <NavDropdown.Item
+                eventKey="/printing"
+                as="button"
+                onClick={() => handleNavClick("/printing")}
+              >
                 {t("navbar.printing")}
               </NavDropdown.Item>
-              <NavDropdown.Item eventKey="/web-development" as="button">
+              <NavDropdown.Item
+                eventKey="/web-development"
+                as="button"
+                onClick={() => handleNavClick("/web-development")}
+              >
                 {t("navbar.web_development")}
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Item as="li">
-              <Nav.Link as={NavLink} to="/contact" onClick={() => handleNavClick("/contact")}>
+              <Nav.Link
+                as={NavLink}
+                to="/contact"
+                onClick={() => handleNavClick("/contact")}
+              >
                 {t("navbar.contact")}
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link as={NavLink} to="/about" onClick={() => handleNavClick("/about")}>
+              <Nav.Link
+                as={NavLink}
+                to="/about"
+                onClick={() => handleNavClick("/about")}
+              >
                 {t("footer.about_us")}
               </Nav.Link>
             </Nav.Item>
@@ -125,18 +164,32 @@ const NavigationBar = () => {
             style={{ gap: "0.5rem" }}
           >
             <button
-              onClick={() => { toggleLang(); setExpanded(false); }}
+              onClick={() => {
+                toggleLang();
+                setExpanded(false);
+              }}
               className="nav-action-btn lang-toggle"
-              aria-label={currentLang === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+              aria-label={
+                currentLang === "ar"
+                  ? "Switch to English"
+                  : "التبديل إلى العربية"
+              }
               tabIndex={0}
               type="button"
             >
               {t("lang.toggle")}
-              </button>
+            </button>
             <button
-              onClick={() => { toggleTheme(); setExpanded(false); }}
+              onClick={() => {
+                toggleTheme();
+                setExpanded(false);
+              }}
               className="nav-action-btn theme-toggle"
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              aria-label={
+                theme === "dark"
+                  ? "Switch to light mode"
+                  : "Switch to dark mode"
+              }
               tabIndex={0}
               type="button"
             >

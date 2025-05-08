@@ -217,52 +217,123 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Qalaj - قَلچ </title>
+        <title>
+          Qalaj | Qalag | قلج | القلج - Integrated Creative Solutions for Your
+          Project's Success
+        </title>
         <meta
           name="description"
-          content="قلج (Qalaj) شركة مصرية تقدم حلولاً إبداعية متكاملة في التصميم الجرافيكي، الطباعة، تطوير الويب، وتوريد المستلزمات. خبرة في تنفيذ المشاريع للشركات والمؤسسات التعليمية بأعلى جودة وأسعار تنافسية. Graphic Design, Printing, Web Development, Supplies in Egypt."
+          content="Qalaj (قلج) is a leading Egyptian company providing creative solutions in graphic design, printing, web development, and supplies. Discover our portfolio, services, and contact us for your next project. Qalag, Qalaj, قلج, القلج."
         />
         <meta
           name="keywords"
-          content="قلج, القلج, qalaj, kalag, qalg, qalag, kalg, تصميم جرافيك, طباعة, تطوير ويب, توريدات مكتبية, Graphic Design, Printing, Web Development, Supplies, Egypt, شركة قلج, Qalaj Egypt, Qalaj Creative Solutions, Qalaj Services, Qalaj Printing, Qalaj Web, Qalaj Design, Qalaj Supplies, Kalag, Kalg, Qalag, Qalg, Kalaj, Kalag Egypt, Kalaj Egypt, Qalaj Company, Qalaj Agency, Qalaj Portfolio, Qalaj Contact"
+          content="Qalaj, Qalag, قلج, القلج, creative solutions, Egypt, graphic design, printing, web development, supplies, portfolio, contact"
         />
         <link rel="canonical" href="https://qalaj.com/" />
         <meta
           property="og:title"
-          content="Qalaj - قَلچ | تصميم جرافيك | طباعة | تطوير ويب | توريدات مكتبية"
+          content="Qalaj | Qalag | قلج | القلج - Creative Solutions in Egypt"
         />
         <meta
           property="og:description"
-          content="قلج (Qalaj) شركة مصرية تقدم حلولاً إبداعية متكاملة في التصميم الجرافيكي، الطباعة، تطوير الويب، وتوريد المستلزمات. خبرة في تنفيذ المشاريع للشركات والمؤسسات التعليمية بأعلى جودة وأسعار تنافسية."
+          content="Qalaj (قلج) offers creative solutions in design, printing, web, and supplies. Explore our work and contact us for your business needs."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://qalaj.com/" />
-        <meta property="og:image" content="/assets/logo.svg" />
+        <meta property="og:image" content="/assets/logo-dark.svg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Qalaj - قَلچ | تصميم جرافيك | طباعة | تطوير ويب | توريدات مكتبية"
+          content="Qalaj | Qalag | قلج | القلج - Creative Solutions in Egypt"
         />
         <meta
           name="twitter:description"
-          content="قلج (Qalaj) شركة مصرية تقدم حلولاً إبداعية متكاملة في التصميم الجرافيكي، الطباعة، تطوير الويب، وتوريد المستلزمات."
+          content="Qalaj (قلج) offers creative solutions in design, printing, web, and supplies. Explore our work and contact us for your business needs."
         />
-        <meta name="twitter:image" content="/assets/logo.svg" />
+        <meta name="twitter:image" content="/assets/logo-dark.svg" />
+        <script type="application/ld+json">{`
+          [{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Qalaj",
+            "alternateName": ["Qalag", "قلج", "القلج"],
+            "url": "https://qalaj.com/",
+            "logo": "https://qalaj.com/assets/logo-dark.svg",
+            "sameAs": [
+              "https://qalaj.com/",
+              "https://www.facebook.com/qalajcreative",
+              "https://www.instagram.com/qalajcreative"
+            ],
+            "contactPoint": [{
+              "@type": "ContactPoint",
+              "telephone": "+201070870826",
+              "contactType": "customer service",
+              "areaServed": "EG",
+              "availableLanguage": ["en", "ar"]
+            }],
+            "description": "Qalaj (قلج) is a leading Egyptian company providing creative solutions in graphic design, printing, web development, and supplies."
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Qalaj",
+            "alternateName": ["Qalag", "قلج", "القلج"],
+            "url": "https://qalaj.com/",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://qalaj.com/search?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "SiteNavigationElement",
+                "position": 1,
+                "name": "Graphic Design",
+                "description": "Professional graphic design services",
+                "url": "https://qalaj.com/graphic-design"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 2,
+                "name": "Printing Services",
+                "description": "High-quality printing solutions",
+                "url": "https://qalaj.com/printing"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 3,
+                "name": "Web Development",
+                "description": "Modern web development services",
+                "url": "https://qalaj.com/web-development"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 4,
+                "name": "Our Work",
+                "description": "Portfolio and success stories",
+                "url": "https://qalaj.com/our-work"
+              },
+              {
+                "@type": "SiteNavigationElement",
+                "position": 5,
+                "name": "Contact Us",
+                "description": "Get in touch with us",
+                "url": "https://qalaj.com/contact"
+              }
+            ]
+          }]
+        `}</script>
       </Helmet>
       <section className="hero-section">
         <Container>
           <Row className="align-items-center text-center">
-            <Col md={6}>
-              <div ref={heroTextRef} className="hero-text">
-                <h1>{t("home.hero_title")}</h1>
-                <p>{t("home.hero_desc")}</p>
-                <a href="/Our-Work">
-                  <button className="Browse-courses">
-                    {t("home.services_btn")}
-                  </button>
-                </a>
-              </div>
-            </Col>
             <Col md={6} ref={heroImageRef} className="hero-image-col">
               <img
                 src={theme === "dark" ? logoDark : logoDark}
@@ -275,6 +346,17 @@ const Home = () => {
                   margin: "0 auto",
                 }}
               />
+            </Col>
+            <Col md={6}>
+              <div ref={heroTextRef} className="hero-text">
+                <h1>{t("home.hero_title")}</h1>
+                <p>{t("home.hero_desc")}</p>
+                <a href="/Our-Work">
+                  <button className="Browse-courses">
+                    {t("home.services_btn")}
+                  </button>
+                </a>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -343,7 +425,7 @@ const Home = () => {
       {/* Gallery Section */}
       <section
         className="gallery-section enhanced-gallery-section"
-        style={{ minHeight: "80vh", padding: "20px 0" }}
+        style={{ padding: "20px 0" }}
       >
         <Container fluid>
           <div className="gallery-header text-center mb-4">
@@ -354,12 +436,18 @@ const Home = () => {
             </h2>
           </div>
           <Carousel
-            indicators={galleryImages.length > chunkSize}
-            controls={galleryImages.length > chunkSize}
+            indicators={
+              galleryImages.length > chunkSize && window.innerWidth >= 577
+            }
+            controls={
+              galleryImages.length > chunkSize && window.innerWidth >= 577
+            }
             interval={2000}
             className="gallery-carousel"
             touch={true}
             slide={true}
+            pause={false}
+            draggable={true}
           >
             {chunkArray(galleryImages, chunkSize).map((group, idx) => (
               <Carousel.Item key={idx}>
@@ -374,7 +462,8 @@ const Home = () => {
                       <div
                         className="gallery-img-card position-relative mb-3"
                         style={{
-                          width: 400,
+                          width: "100%",
+                          maxWidth: 400,
                           height: 420,
                           borderRadius: 16,
                           overflow: "hidden",
@@ -412,13 +501,14 @@ const Home = () => {
               </Carousel.Item>
             ))}
           </Carousel>
-          <div className="gallery-cta text-center mt-4">
+          <div className="gallery-cta text-center mt-4 gallery-cta-responsive">
             <a href="/our-work" className="gallery-cta-btn">
               {i18n.language === "ar"
                 ? "شاهد المزيد من أعمالنا"
                 : "See More of Our Work"}
             </a>
             <span
+              className="gallery-cta-separator"
               style={{
                 margin: "0 12px",
                 color: "var(--color-secondary)",
@@ -433,6 +523,44 @@ const Home = () => {
                 : "Contact Us for Your Next Project"}
             </a>
           </div>
+          <style>{`
+            @media (max-width: 576px) {
+              .carousel-indicators, .carousel-control-prev, .carousel-control-next {
+                display: none !important;
+              }
+              .gallery-img-card {
+                width: 90vw !important;
+                max-width: 98vw !important;
+                height: 220px !important;
+              }
+            }
+            @media (max-width: 576px) {
+              .gallery-header h2 {
+                font-size: 1.3rem !important;
+              }
+              .gallery-img-card {
+                width: 98vw !important;
+                max-width: 99vw !important;
+                height: 160px !important;
+                border-radius: 10px !important;
+              }
+              .gallery-cta-responsive {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+              }
+              .gallery-cta-separator {
+                display: none;
+              }
+              .gallery-cta-btn, .gallery-cta-btn.alt {
+                width: 100%;
+                max-width: 320px;
+                font-size: 1rem;
+                padding: 10px 0;
+              }
+            }
+          `}</style>
         </Container>
       </section>
     </>

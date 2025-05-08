@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage -->
   <url>
     <loc>https://qalaj.com/</loc>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar"/>
   </url>
+
+  <!-- Main Services -->
   <url>
     <loc>https://qalaj.com/graphic-design</loc>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/graphic-design"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/graphic-design"/>
   </url>
   <url>
     <loc>https://qalaj.com/printing</loc>
-    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/printing"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/printing"/>
   </url>
   <url>
     <loc>https://qalaj.com/web-development</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/web-development"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/web-development"/>
+  </url>
+
+  <!-- Portfolio and About -->
+  <url>
+    <loc>https://qalaj.com/our-work</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://qalaj.com/supplies</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://qalaj.com/portfolio</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://qalaj.com/contact</loc>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/our-work"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/our-work"/>
   </url>
   <url>
     <loc>https://qalaj.com/about</loc>
-    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/about"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/about"/>
   </url>
+
+  <!-- Contact -->
   <url>
-    <loc>https://qalaj.com/request-quote</loc>
-    <priority>0.6</priority>
+    <loc>https://qalaj.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qalaj.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qalaj.com/ar/contact"/>
   </url>
 </urlset>
