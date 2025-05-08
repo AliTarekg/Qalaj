@@ -11,7 +11,7 @@
   --color-secondary: #d8ab41;
   --color-accent: #073b4c;
   --color-navbar: linear-gradient(135deg, #284574, #161f48);
-  --color-card: #d19c21;
+  --color-card: #e7b52b;
   --font-family-arabic: "Cairo", sans-serif;
   --font-family-english: "Raleway", sans-serif;
 }
@@ -25,7 +25,7 @@
   --color-secondary: #d8ab41;
   --color-accent: #284574;
   --color-navbar: linear-gradient(135deg, #161f48, #101624);
-  --color-card: #d19c21;
+  --color-card: #d8a311;
 }
 
 body,
