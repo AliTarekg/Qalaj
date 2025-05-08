@@ -7,6 +7,7 @@ import "./NavigationBar.css";
 import logoDark from "../assets/logo-dark.svg";
 import logoLight from "../assets/logo-light.svg";
 import { useRef, useState, useEffect } from "react";
+import { useAuth } from "../AuthContext";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const NavigationBar = () => {
   const navDropdownRef = useRef();
   const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef();
+  const { user, logout } = useAuth();
 
   const toggleLang = () => {
     const newLang = currentLang === "ar" ? "en" : "ar";
@@ -195,6 +197,34 @@ const NavigationBar = () => {
             >
               {theme === "dark" ? "☀️" : "🌙"}
             </button>
+            {/* Auth links */}
+            {!user && (
+              <>
+                <NavLink to="/login" className="btn btn-outline-primary ms-2" onClick={() => setExpanded(false)}>
+                  {t("navbar.login") || "Login"}
+                </NavLink>
+                <NavLink to="/register" className="btn btn-primary ms-2" onClick={() => setExpanded(false)}>
+                  {t("navbar.register") || "Register"}
+                </NavLink>
+              </>
+            )}
+            {user && (
+              <>
+                <span className="navbar-text ms-2">
+                  {user.name || user.email}
+                </span>
+                <button
+                  className="btn btn-danger ms-2"
+                  onClick={async () => {
+                    await logout();
+                    navigate("/");
+                    setExpanded(false);
+                  }}
+                >
+                  {t("navbar.logout") || "Logout"}
+                </button>
+              </>
+            )}
           </div>
         </Navbar.Collapse>
       </Container>
