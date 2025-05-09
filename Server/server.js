@@ -4,15 +4,15 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-const { testConnection } = require('./src/config/database');
+const { testConnection } = require('./src/config/db');
 
 // Import routes
 const authRoutes = require('./src/routes/auth.routes');
-const orderRoutes = require('./src/routes/order.routes');
-const inquiryRoutes = require('./src/routes/inquiry.routes');
-const supplierRoutes = require('./src/routes/supplier.routes');
-const invoiceRoutes = require('./src/routes/invoice.routes');
-const paymentRoutes = require('./src/routes/payment.routes');
+const inquiriesRoutes = require('./src/routes/inquiries.routes');
+const usersRoutes = require('./src/routes/users.routes');
+const customersRoutes = require('./src/routes/customers.routes');
+const invoicesRoutes = require('./src/routes/invoices.routes');
+const ordersRoutes = require('./src/routes/orders.routes');
 
 const app = express();
 
@@ -37,11 +37,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/inquiries', inquiryRoutes);
-app.use('/api/suppliers', supplierRoutes);
-app.use('/api/invoices', invoiceRoutes);
-app.use('/api/payments', paymentRoutes);
+app.use('/api/inquiries', inquiriesRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/customers', customersRoutes);
+app.use('/api/invoices', invoicesRoutes);
+app.use('/api/orders', ordersRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

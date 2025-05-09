@@ -1,21 +1,35 @@
-// src/api/axiosInstance.js
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-const instance = axios.create({
-  baseURL: '/api',
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const axiosInstance = axios.create({
+    baseURL:'http://localhost:5001/api',
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
-// Optional: Add interceptors for auth, error handling, etc.
-instance.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // You can handle global errors here
+// Add token to requests if it exists
+axiosInstance.interceptors.request.use(config => {
+    const token = Cookies.get('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, error => {
     return Promise.reject(error);
-  }
+});
+
+// Handle token expiration
+axiosInstance.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response?.status === 401) {
+            Cookies.remove('token');
+            Cookies.remove('user');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
 );
 
-export default instance;
+export default axiosInstance;

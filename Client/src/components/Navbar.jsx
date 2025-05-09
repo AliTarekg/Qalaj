@@ -201,10 +201,10 @@ const NavigationBar = () => {
             {!user && (
               <>
                 <NavLink to="/login" className="btn btn-outline-primary ms-2" onClick={() => setExpanded(false)}>
-                  {t("navbar.login") || "Login"}
+                  {t("Login") || "Login"}
                 </NavLink>
                 <NavLink to="/register" className="btn btn-primary ms-2" onClick={() => setExpanded(false)}>
-                  {t("navbar.register") || "Register"}
+                  {t("Register") || "Register"}
                 </NavLink>
               </>
             )}
@@ -221,7 +221,7 @@ const NavigationBar = () => {
                     setExpanded(false);
                   }}
                 >
-                  {t("navbar.logout") || "Logout"}
+                  {t("Logout") || "Logout"}
                 </button>
               </>
             )}

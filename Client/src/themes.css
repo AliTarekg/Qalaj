@@ -74,3 +74,10 @@ h6 {
   background: var(--color-secondary);
   color: var(--color-primary);
 }
+
+.container-bg {
+  background: var(--color-bg);
+  border-radius: 30px;
+  box-shadow: 0px 1px 1px #ffffff1a, 0px 50px 100px -20px #00008040,
+    0px 30px 60px -30px #0000004d;
+}
