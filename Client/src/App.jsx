@@ -10,6 +10,8 @@ import InquiriesDashboard from "./components/InquiriesDashboard.jsx";
 import CustomersDashboard from "./components/CustomersDashboard.jsx";
 import { CartProvider } from "./components/CartContext";
 import { ToastProvider } from "./components/ToastContext";
+import Checkout from "./components/Checkout.jsx"
+import OrderSuccess from "./components/OrderSuccess.jsx";
 
 // Lazy load public components
 const NotFound = React.lazy(() => import("./components/404"));
@@ -94,6 +96,18 @@ function App() {
                     <PrivateRoute>
                       <AdminDashboard />
                     </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                      <Checkout />
+                  }
+                />
+                <Route
+                  path="/Order/Success"
+                  element={
+                      <OrderSuccess />
                   }
                 />
                 <Route path="*" element={<NotFound />} />

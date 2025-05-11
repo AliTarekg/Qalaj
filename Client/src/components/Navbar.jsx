@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import  { useRef, useState, useEffect } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import { FaCog, FaShoppingCart } from "react-icons/fa";
 import { useCart } from "./CartContext";
 import CartDrawer from "./CartDrawer";
 import ToastContainer from "./ToastContainer";
-
+import Cookies from 'js-cookie'
 const NavigationBar = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -59,7 +59,16 @@ const NavigationBar = () => {
     setExpanded(false);
     if (to) navigate(to);
   };
-
+  const handleLogout = () => {
+    // Remove auth cookies
+    Cookies.remove("token");
+    Cookies.remove("user");
+    // Redirect to login
+    navigate("/login");
+    // Optionally, close dropdown or cart if open
+    setExpanded(false);
+    setCartOpen(false);
+  };
   return (
     <Navbar
       collapseOnSelect
@@ -196,10 +205,10 @@ const NavigationBar = () => {
             {/* Floating Cart Icon */}
             <div
               className="cart-icon-wrapper position-relative me-3"
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", color: "white" }}
               onClick={() => setCartOpen(true)}
             >
-              <FaShoppingCart size={26} />
+              <FaShoppingCart size={24} />
               {cart.length > 0 && (
                 <span className="cart-count-badge">
                   {cart.reduce((sum, i) => sum + i.quantity, 0)}
@@ -263,14 +272,7 @@ const NavigationBar = () => {
                   <NavDropdown.ItemText>
                     {user.username || user.email}
                   </NavDropdown.ItemText>
-                  <NavDropdown.Item
-                    as="button"
-                    onClick={async () => {
-                      await logout();
-                      navigate("/");
-                      setExpanded(false);
-                    }}
-                  >
+                  <NavDropdown.Item as="button" onClick={handleLogout}>
                     {t("Logout") || "Logout"}
                   </NavDropdown.Item>
                 </>

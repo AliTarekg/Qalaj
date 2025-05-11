@@ -1,83 +1,79 @@
-import React, { useState } from "react";
-import ItemsList from "./ItemsList";
-import Cart from "./Cart";
-import axios from '../api/axiosInstance';
+import  { useEffect, useState } from "react";
+import { getItems } from "../api/items";
+import { useCart } from "./CartContext";
+import { useNavigate } from "react-router-dom";
+import { Card, Button, Row, Col, Spinner, Badge } from "react-bootstrap";
 
-const Shop = ({ onCheckoutComplete }) => {
-  const [cart, setCart] = useState([]);
-  const [customer, setCustomer] = useState({ name: '', email: '', phone: '', address: '' });
-  const [showCustomerForm, setShowCustomerForm] = useState(false);
+const Shop = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { cart, addToCart, cartCount, cartTotal, clearCart } = useCart();
+  const navigate = useNavigate();
 
-  const handleAddToCart = (item) => {
-    setCart((prev) => {
-      const found = prev.find((i) => i.id === item.id);
-      if (found) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-        );
-      } else {
-        return [...prev, { ...item, quantity: 1 }];
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true);
+      try {
+        const data = await getItems();
+        setItems(data);
+      } catch (err) {
+        console.error("Error loading items:", err);
+      } finally {
+        setLoading(false);
       }
-    });
-  };
-
-  const handleRemove = (id) => {
-    setCart((prev) => prev.filter((i) => i.id !== id));
-  };
-
-  const handleCheckout = async () => {
-    if (cart.length === 0) return;
-    if (!customer.name || !customer.email || !customer.phone || !customer.address) {
-      setShowCustomerForm(true);
-      return;
-    }
-    const orderData = {
-      customer_id: 1, // Replace with actual customer logic if needed
-      client_name: customer.name,
-      order_date: new Date().toISOString().slice(0, 10),
-      total_amount: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      status: 'completed',
-      notes: `Email: ${customer.email}, Phone: ${customer.phone}, Address: ${customer.address}`
     };
-    try {
-      const orderRes = await axios.post('/orders', orderData);
-      const orderId = orderRes.data.id;
-      for (const item of cart) {
-        await axios.post('/order-items', {
-          order_id: orderId,
-          item_id: item.id,
-          description: item.name,
-          quantity: item.quantity,
-          unit_price: item.price
-        });
-      }
-      setCart([]);
-      onCheckoutComplete && onCheckoutComplete();
-      alert('Purchase successful!');
-    } catch (err) {
-      alert('Error processing order.');
-    }
-  };
+    fetch();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center my-5">
+        <Spinner animation="border" />
+      </div>
+    );
+  }
 
   return (
-    <div className="row">
-      <div className="col-md-7">
-        <ItemsList onAddToCart={handleAddToCart} />
+    <div className="container my-5">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2>Shop</h2>
+        <Button variant="primary" onClick={() => navigate('/checkout')} disabled={cart.length === 0}>
+          View Cart <Badge bg="light" text="dark">{cartCount}</Badge>
+          <span className="ms-2">(${cartTotal.toFixed(2)})</span>
+        </Button>
       </div>
-      <div className="col-md-5">
-        <Cart cart={cart} onRemove={handleRemove} onCheckout={handleCheckout} />
-        {showCustomerForm && (
-          <div className="mt-3 p-3 border rounded bg-light">
-            <h5>Enter your details to complete purchase</h5>
-            <input className="form-control mb-2" placeholder="Name" value={customer.name} onChange={e => setCustomer({ ...customer, name: e.target.value })} />
-            <input className="form-control mb-2" placeholder="Email" value={customer.email} onChange={e => setCustomer({ ...customer, email: e.target.value })} />
-            <input className="form-control mb-2" placeholder="Phone" value={customer.phone} onChange={e => setCustomer({ ...customer, phone: e.target.value })} />
-            <input className="form-control mb-2" placeholder="Address" value={customer.address} onChange={e => setCustomer({ ...customer, address: e.target.value })} />
-            <button className="btn btn-success me-2" onClick={() => setShowCustomerForm(false)}>Continue</button>
-            <button className="btn btn-secondary" onClick={() => setShowCustomerForm(false)}>Cancel</button>
-          </div>
-        )}
-      </div>
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+        {items.map(item => {
+          const imgSrc = item.image_url.startsWith('http')
+            ? item.image_url
+            : `${import.meta.env.VITE_API_URL || ''}${item.image_url}`;
+          return (
+            <Col key={item.id}>
+              <Card className="h-100">
+                {imgSrc && <Card.Img variant="top" src={imgSrc} style={{ objectFit: 'cover', height: 200 }} />}
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text className="text-truncate" style={{ flex: 1 }}>
+                    {item.description}
+                  </Card.Text>
+                  <div className="mb-2">
+                    <strong>${Number(item.price).toFixed(2)}</strong>
+                    {' '}<Badge bg="warning" text="dark">Stock: {item.stock}</Badge>
+                  </div>
+                  <Button
+                    variant="outline-success"
+                    onClick={() => addToCart(item)}
+                    disabled={item.stock <= 0}
+                    className="mt-auto"
+                  >
+                    Add to Cart
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 };

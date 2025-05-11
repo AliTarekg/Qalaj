@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { getItems } from "../api/items";
 import { useCart } from "./CartContext";
+import { Spinner, Card, Button, Badge, Row, Col } from "react-bootstrap";
+import "./items.css";
 
 const ProductsShowcase = ({ onCartOpen }) => {
-  const [items,   setItems  ] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
+  const apiBase = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     getItems()
@@ -14,129 +17,83 @@ const ProductsShowcase = ({ onCartOpen }) => {
   }, []);
 
   if (loading) {
-    return <div className="text-center my-5">Loading products...</div>;
+    return (
+      <div className="text-center my-5">
+        <Spinner animation="border" role="status" />
+      </div>
+    );
   }
 
   return (
     <div className="container my-5">
       <h2 className="mb-4 text-center">Our Products</h2>
-      <div className="row g-4">
-        {items.map(item => {
-          const imageLink = item.image_url.startsWith("http")
+      <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+        {items.map((item) => {
+          const imageUrl = item.image_url.startsWith("http")
             ? item.image_url
-            : `http://localhost:5001${item.image_url}`;
+            : `${apiBase}${item.image_url}`;
 
           return (
-            <div className="col-md-4 col-lg-3" key={item.id}>
-              <div className="card h-100 shadow-sm product-card-shopify">
-                {imageLink && (
-                  <img
-                    src={imageLink}
+            <Col key={item.id}>
+              <Card className="product-card h-100">
+                <div className="card-img-container">
+                  <Card.Img
+                    variant="top"
+                    src={imageUrl}
                     alt={item.name}
-                    className="card-img-top"
-                    style={{
-                      objectFit: "cover",
-                      height: 220,
-                      width: "100%",
-                      display: "block",
-                      borderTopLeftRadius: 12,
-                      borderTopRightRadius: 12,
-                    }}
+                    className="product-img"
                   />
-                )}
-
-                <div className="card-body d-flex flex-column align-items-center text-center">
-                  <h5 className="card-title mb-2" style={{ fontWeight: 700 }}>
-                    {item.name}
-                  </h5>
-                  <div className="mb-2">
-                    <span
-                      className="badge bg-success"
-                      style={{ fontSize: "1.1rem", padding: "8px 16px" }}
-                    >
-                      ${Number(item.price).toFixed(2)}
-                    </span>
-                  </div>
-                  <p
-                    className="card-text text-muted mb-2"
-                    style={{ minHeight: 40 }}
-                  >
-                    {item.description}
-                  </p>
-                  {item.sizes && (
-                    <div className="mb-2">
-                      <span className="badge bg-secondary">
-                        Sizes: {item.sizes}
-                      </span>
-                    </div>
+                  {item.stock === 0 && (
+                    <Badge bg="danger" className="stock-overlay">
+                      Out of Stock
+                    </Badge>
                   )}
-                  <div className="mb-3">
-                    <span className="badge bg-light text-dark">
-                      Stock: {item.stock}
-                    </span>
-                  </div>
-
-                  <div className="d-flex gap-2 w-100">
-                    <button
-                      className="btn btn-outline-primary w-100"
-                      style={{ fontWeight: 600 }}
-                      onClick={() => {
-                        addToCart(item);
-                        onCartOpen();
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                    <button
-                      className="btn btn-primary w-100"
-                      style={{ fontWeight: 700 }}
-                      onClick={() => {
-                        addToCart(item);
-                        onCartOpen();
-                      }}
-                    >
-                      Buy Now
-                    </button>
-                  </div>
                 </div>
-              </div>
-            </div>
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title className="text-truncate">
+                    {item.name}
+                  </Card.Title>
+                  <Card.Text className="flex-grow-1 text-muted small">
+                    {item.description}
+                  </Card.Text>
+                  <div className="d-flex align-items-center mb-3">
+                    <h5 className="mb-0 me-auto">
+                      ${Number(item.price).toFixed(2)}
+                    </h5>
+                    <Badge bg={item.stock > 0 ? "success" : "secondary"}>
+                      {item.stock} {item.stock > 1 ? "in stock" : "left"}
+                    </Badge>
+                  </div>
+                  <Button
+                    variant="outline-primary"
+                    className="mb-2"
+                    disabled={item.stock === 0}
+                    onClick={() => {
+                      addToCart(item);
+                      onCartOpen();
+                    }}
+                  >
+                    Add to Cart
+                  </Button>
+                  <Button
+                    variant="primary"
+                    disabled={item.stock === 0}
+                    onClick={() => {
+                      addToCart(item);
+                      onCartOpen();
+                    }}
+                  >
+                    Buy Now
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
           );
         })}
-
-        {items.length === 0 && (
-          <div className="col-12 text-center">No products found.</div>
-        )}
-      </div>
-
-      {/* your existing styles */}
-      <style>{`
-        .product-card-shopify {
-          border-radius: 12px;
-          transition: box-shadow 0.2s, transform 0.2s;
-          box-shadow: 0 4px 24px rgba(22,31,72,0.10);
-          background: #fff;
-        }
-        .product-card-shopify:hover {
-          box-shadow: 0 8px 32px rgba(216,171,65,0.18);
-          transform: translateY(-6px) scale(1.03);
-        }
-        .product-card-shopify .card-title {
-          font-size: 1.2rem;
-        }
-        .product-card-shopify .btn-primary {
-          background: #161f48;
-          border-color: #d8ab41;
-        }
-        .product-card-shopify .btn-outline-primary {
-          border-color: #161f48;
-          color: #161f48;
-        }
-        .product-card-shopify .btn-outline-primary:hover {
-          background: #161f48;
-          color: #fff;
-        }
-      `}</style>
+      </Row>
+      {items.length === 0 && (
+        <div className="col-12 text-center">No products found.</div>
+      )}
     </div>
   );
 };

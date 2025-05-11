@@ -1,0 +1,83 @@
+.checkout-container {
+  max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+}
+.checkout-content {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+}
+.checkout-summary {
+  flex: 1 1 300px; background: #05e9c3ad; padding: 1rem;
+  border-radius: 6px;
+}
+.summary-item {
+  display: flex; align-items: center; margin-bottom: 1rem;
+}
+.summary-img {
+  width: 48px; height: 48px; object-fit: cover; margin-right: 0.75rem;
+  border-radius: 4px;
+}
+.summary-info {
+  display: flex; justify-content: space-between; width: 100%;
+}
+.summary-total {
+  display: flex; justify-content: space-between;
+  font-size: 1.25rem; font-weight: 600; border-top: 1px solid #ddd;
+  padding-top: 0.75rem;
+}
+.checkout-form {
+  flex: 1 1 300px;
+}
+.form-group {
+  margin-bottom: 1rem;
+}
+/* Container for image to enable hover zoom */
+.card-img-container {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.product-card:hover .product-img {
+  transform: scale(1.1);
+}
+
+/* “Out of Stock” badge centered */
+.stock-overlay {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 0.3em 0.6em;
+  font-size: 0.8rem;
+}
+
+/* Card hover lift + shadow */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 12px;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Truncate long titles */
+.card-title.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive price & stock line */
+@media (max-width: 576px) {
+  .d-flex.align-items-center.mb-3 h5 {
+    font-size: 1rem;
+  }
+  .stock-overlay {
+    font-size: 0.7rem;
+  }
+}

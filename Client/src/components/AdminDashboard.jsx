@@ -1,56 +1,67 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import {
+  FaUsers,
+  FaQuestionCircle,
+  FaBoxOpen,
+  FaShoppingCart,
+  FaChartLine,
+} from "react-icons/fa";
+
+const cards = [
+  {
+    title: "Customers",
+    text: "Manage all customers and their details.",
+    icon: <FaUsers size={28} className="text-primary mb-2" />,
+    link: "/Customers",
+  },
+  {
+    title: "Inquiries",
+    text: "View and manage customer inquiries.",
+    icon: <FaQuestionCircle size={28} className="text-primary mb-2" />,
+    link: "/dashboard/inquiries",
+  },
+  {
+    title: "Items",
+    text: "Add, edit, or remove items for sale.",
+    icon: <FaBoxOpen size={28} className="text-primary mb-2" />,
+    link: "/dashboard/items",
+  },
+  {
+    title: "Orders",
+    text: "Track and manage all orders.",
+    icon: <FaShoppingCart size={28} className="text-primary mb-2" />,
+    link: "/dashboard/orders",
+  },
+  {
+    title: "Sales",
+    text: "View sales analytics and reports.",
+    icon: <FaChartLine size={28} className="text-primary mb-2" />,
+    link: "/dashboard/sales",
+  },
+];
 
 const AdminDashboard = () => {
   return (
     <div className="container my-5">
-      <h1 className="mb-4">Admin Dashboard</h1>
+      <h1 className="mb-4 text-center fw-bold">Admin Dashboard</h1>
       <div className="row g-4">
-        <div className="col-md-4">
-          <div className="card h-100 shadow-sm">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title">Customers</h5>
-              <p className="card-text">Manage all customers and their details.</p>
-              <Link to="/Customers" className="btn btn-primary mt-auto">Go to Customers</Link>
+        {cards.map((card, index) => (
+          <div key={index} className="col-md-4">
+            <div className="card h-100 shadow-sm border-0 hover-card">
+              <div className="card-body d-flex flex-column align-items-start">
+                {card.icon}
+                <h5 className="card-title fw-semibold">{card.title}</h5>
+                <p className="card-text">{card.text}</p>
+                <Link
+                  to={card.link}
+                  className="btn btn-primary mt-auto w-100"
+                >
+                  Go to {card.title}
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 shadow-sm">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title">Inquiries</h5>
-              <p className="card-text">View and manage customer inquiries.</p>
-              <Link to="/dashboard/inquiries" className="btn btn-primary mt-auto">Go to Inquiries</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 shadow-sm">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title">Items</h5>
-              <p className="card-text">Add, edit, or remove items for sale.</p>
-              <Link to="/dashboard/items" className="btn btn-primary mt-auto">Go to Items</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 shadow-sm">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title">Orders</h5>
-              <p className="card-text">Track and manage all orders.</p>
-              <Link to="/dashboard/orders" className="btn btn-primary mt-auto">Go to Orders</Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card h-100 shadow-sm">
-            <div className="card-body d-flex flex-column justify-content-between">
-              <h5 className="card-title">Sales</h5>
-              <p className="card-text">View sales analytics and reports.</p>
-              <Link to="/dashboard/sales" className="btn btn-primary mt-auto">Go to Sales</Link>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

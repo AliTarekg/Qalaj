@@ -24,8 +24,8 @@ router.post('/upload', verifyToken, upload.single('image'), (req, res) => {
 });
 
 // CRUD
-router.get('/', verifyToken, itemsController.listItems);
-router.get('/:id', verifyToken, itemsController.getItem);
+router.get('/', itemsController.listItems);
+router.get('/:id', itemsController.getItem);
 router.post('/', verifyToken, itemsController.createItem);
 router.put('/:id', verifyToken, itemsController.updateItem);
 router.delete('/:id', verifyToken, itemsController.deleteItem);

@@ -1,0 +1,12 @@
+{
+  "name": "qalag",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"cd Client && npm start\" \"cd Server && npm run dev\"",
+    "install-all": "npm install && cd Client && npm install && cd ../Server && npm install",
+    "dev": "concurrently \"cd Client && npm run dev\" \"cd Server && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
