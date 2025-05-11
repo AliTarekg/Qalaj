@@ -14,3 +14,8 @@ export const getOrderItems = async (orderId) => {
   const res = await axios.get(`/order-items/${orderId}`);
   return res.data;
 };
+
+export const getOrders = async () => {
+  const res = await axios.get('/orders');
+  return res.data;
+};

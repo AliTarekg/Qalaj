@@ -1,13 +1,17 @@
+import React, { useRef, useState, useEffect } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "../i18n";
 import { useTheme } from "../ThemeContext";
-import "./NavigationBar.css";
+import { useAuth } from "../AuthContext";
 import logoDark from "../assets/logo-dark.svg";
 import logoLight from "../assets/logo-light.svg";
-import { useRef, useState, useEffect } from "react";
-import { useAuth } from "../AuthContext";
+import "./NavigationBar.css";
+import { FaCog, FaShoppingCart } from "react-icons/fa";
+import { useCart } from "./CartContext";
+import CartDrawer from "./CartDrawer";
+import ToastContainer from "./ToastContainer";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
@@ -16,9 +20,11 @@ const NavigationBar = () => {
   const { theme, toggleTheme } = useTheme();
   const dir = document.documentElement.dir || "ltr";
   const navDropdownRef = useRef();
-  const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef();
+  const [expanded, setExpanded] = useState(false);
   const { user, logout } = useAuth();
+  const [cartOpen, setCartOpen] = useState(false);
+  const { cart } = useCart();
 
   const toggleLang = () => {
     const newLang = currentLang === "ar" ? "en" : "ar";
@@ -74,7 +80,7 @@ const NavigationBar = () => {
             className="d-inline-block align-top me-2"
             style={{ height: "48px" }}
           />
-          <span className="fw-bold " style={{ marginRight: "8px" }}>
+          <span className="fw-bold" style={{ marginRight: "8px" }}>
             {currentLang === "ar" ? " قَلچ " : "Qalaj"}
           </span>
         </Navbar.Brand>
@@ -158,76 +164,123 @@ const NavigationBar = () => {
                 {t("footer.about_us")}
               </Nav.Link>
             </Nav.Item>
-          </Nav>
-          <div
-            className={`d-flex align-items-center navbar-actions ${
-              dir === "rtl" ? "me-auto" : "ms-auto"
-            }`}
-            style={{ gap: "0.5rem" }}
-          >
-            <button
-              onClick={() => {
-                toggleLang();
-                setExpanded(false);
-              }}
-              className="nav-action-btn lang-toggle"
-              aria-label={
-                currentLang === "ar"
-                  ? "Switch to English"
-                  : "التبديل إلى العربية"
-              }
-              tabIndex={0}
-              type="button"
-            >
-              {t("lang.toggle")}
-            </button>
-            <button
-              onClick={() => {
-                toggleTheme();
-                setExpanded(false);
-              }}
-              className="nav-action-btn theme-toggle"
-              aria-label={
-                theme === "dark"
-                  ? "Switch to light mode"
-                  : "Switch to dark mode"
-              }
-              tabIndex={0}
-              type="button"
-            >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-            {/* Auth links */}
-            {!user && (
-              <>
-                <NavLink to="/login" className="btn btn-outline-primary ms-2" onClick={() => setExpanded(false)}>
-                  {t("Login") || "Login"}
-                </NavLink>
-                <NavLink to="/register" className="btn btn-primary ms-2" onClick={() => setExpanded(false)}>
-                  {t("Register") || "Register"}
-                </NavLink>
-              </>
-            )}
             {user && (
               <>
-                <span className="navbar-text ms-2">
-                  {user.name || user.email}
-                </span>
-                <button
-                  className="btn btn-danger ms-2"
-                  onClick={async () => {
-                    await logout();
-                    navigate("/");
-                    setExpanded(false);
-                  }}
-                >
-                  {t("Logout") || "Logout"}
-                </button>
+                <Nav.Item as="li">
+                  <Nav.Link
+                    as={NavLink}
+                    to="/dashboard/inquiries"
+                    onClick={() => handleNavClick("/dashboard/inquiries")}
+                  >
+                    Inquiries{" "}
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item as="li">
+                  <Nav.Link
+                    as={NavLink}
+                    to="/Customers"
+                    onClick={() => handleNavClick("/Customers")}
+                  >
+                    Customers{" "}
+                  </Nav.Link>
+                </Nav.Item>
               </>
             )}
-          </div>
+          </Nav>
+
+          <Nav
+            className={`align-items-center ${
+              dir === "rtl" ? "me-auto" : "ms-auto"
+            }`}
+          >
+            {/* Floating Cart Icon */}
+            <div
+              className="cart-icon-wrapper position-relative me-3"
+              style={{ cursor: "pointer" }}
+              onClick={() => setCartOpen(true)}
+            >
+              <FaShoppingCart size={26} />
+              {cart.length > 0 && (
+                <span className="cart-count-badge">
+                  {cart.reduce((sum, i) => sum + i.quantity, 0)}
+                </span>
+              )}
+            </div>
+            <NavDropdown
+              // for RTL pages: open “start” (left), for LTR: open “end” (right)
+              align={dir === "rtl" ? "start" : "end"}
+              // optional: if you want the menu itself to drop to the left in RTL:
+              // drop={dir === "rtl" ? "start" : "down"}
+              title={<FaCog size={20} />}
+              id="settings-dropdown"
+              menuVariant={theme === "dark" ? "dark" : "light"}
+              renderMenuOnMount
+              // apply a directional CSS class
+              menuClassName={
+                dir === "rtl" ? "dropdown-menu-rtl" : "dropdown-menu-ltr"
+              }
+            >
+              <NavDropdown.Item
+                as="button"
+                onClick={() => {
+                  toggleLang();
+                  setExpanded(false);
+                }}
+              >
+                {t("lang.toggle")}
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as="button"
+                onClick={() => {
+                  toggleTheme();
+                  setExpanded(false);
+                }}
+              >
+                {theme === "dark"
+                  ? t("Light Mode") || "Light Mode"
+                  : t("Dark Mode") || "Dark Mode"}
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              {!user ? (
+                <>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/login"
+                    onClick={() => setExpanded(false)}
+                  >
+                    {t("Login") || "Login"}
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/register"
+                    onClick={() => setExpanded(false)}
+                  >
+                    {t("Register") || "Register"}
+                  </NavDropdown.Item>
+                </>
+              ) : (
+                <>
+                  <NavDropdown.ItemText>
+                    {user.username || user.email}
+                  </NavDropdown.ItemText>
+                  <NavDropdown.Item
+                    as="button"
+                    onClick={async () => {
+                      await logout();
+                      navigate("/");
+                      setExpanded(false);
+                    }}
+                  >
+                    {t("Logout") || "Logout"}
+                  </NavDropdown.Item>
+                </>
+              )}
+            </NavDropdown>
+          </Nav>
         </Navbar.Collapse>
       </Container>
+      <CartDrawer show={cartOpen} onClose={() => setCartOpen(false)} />
+      <ToastContainer />
     </Navbar>
   );
 };

@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import ServiceSlider from "./ServiceSlider";
 import { useTheme } from "../ThemeContext";
 import logoDark from "../assets/logo-dark.svg";
+import ProductsShowcase from "./ProductsShowcase";
 
 const AnimatedCounter = ({ target, duration = 3, suffix = "" }) => {
   const ref = useRef(null);
@@ -363,6 +364,7 @@ const Home = () => {
       </section>
       <Separator />
       <ServiceSlider />
+      <ProductsShowcase />
       <section className="stats-section " style={{ margin: "30px" }}>
         <Container>
           <Row className="text-center">
